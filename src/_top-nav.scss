@@ -1,0 +1,29 @@
+.nav__top {
+  color: #fff;
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4.5rem;
+  /*top & bottom paddin will be removed*/
+  padding: 1.5rem;
+  background-color: var(--color-primary);
+  &-left {
+    display: flex;
+  }
+  &-right {
+    display: flex;
+  }
+  .nav-logo:not(:last-child) {
+    margin-right: 1.5rem;
+  }
+
+  .nav-search {
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+  }
+}

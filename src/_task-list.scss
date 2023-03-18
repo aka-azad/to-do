@@ -1,0 +1,47 @@
+//to-do list section
+
+.list-items {
+  .to-do__list {
+    &-cont {
+      margin: 2rem 0;
+      padding: 0.5rem 0;
+      border-top: 1px solid var(--color-grey-light-2);
+      border-bottom: 1px solid var(--color-grey-light-2);
+      position: relative;
+      &--top {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        height: 2.5rem;
+
+        .to-do__left-cont {
+          display: flex;
+          align-items: center;
+          position: absolute;
+          top: 0;
+          left: -3rem;
+
+          .radio--btn {
+            font-size: 1.4rem;
+          }
+        }
+        .to-do__right-cont {
+          position: absolute;
+          right: -3rem;
+          top: 0;
+        }
+      }
+      .to-do__dscr {
+        font-size: 1.2rem;
+        color: var(--color-grey-dark-1);
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  &:hover {
+    .btn-hollow {
+      opacity: 1;
+    }
+  }
+}
