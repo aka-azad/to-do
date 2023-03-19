@@ -1,0 +1,39 @@
+.radio--btn {
+  font-size: 1.4rem;
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
+}
+
+input[type="radio"] {
+  appearance: none;
+  background-color: #d409093d;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.1em;
+  height: 1.1em;
+  border: 0.15em solid var(--color-primary);
+  border-radius: 50%;
+  margin: auto 0;
+  cursor: pointer;
+
+  display: grid;
+  place-content: center;
+}
+
+input[type="radio"]::before {
+  content: "";
+
+  width: 0.65em;
+  height: 0.65em;
+
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 0.2s transform ease-in-out;
+  box-shadow: inset 1em 1em var(--color-primary);
+  margin: auto 0;
+}
+input[type="radio"]:checked::before {
+  transform: scale(1);
+}
