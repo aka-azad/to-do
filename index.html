@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://unpkg.com/feather-icons"></script>
 
     <title>TO DO LIST</title>
   </head>
@@ -69,12 +68,12 @@
               </div>
               <div class="to-do__btn">
                 <button class="btn btn-cencel" type="button">Cencel</button>
-                <button class="btn btn-submit" type="button">Add task</button>
+                <button class="btn btn-submit" type="submit">Add task</button>
               </div>
             </form>
             <div class="list-items">
-              <ul class="to-do__list">
-                <li class="to-do__list-cont">
+              <ul class="to-do__list" id="task-list">
+                <!-- <li class="to-do__list-cont">
                   <div class="to-do__list-cont--top">
                     <div class="to-do__left-cont">
                       <button class="grab--btn btn-hollow">
@@ -100,16 +99,14 @@
                   </div>
 
                   <p class="to-do__dscr">bla bla bla</p>
-                </li>
+                </li> -->
               </ul>
             </div>
           </div>
         </div>
       </section>
     </div>
-    <script>
-      feather.replace({ class: "foo bar", "stroke-width": 1 });
-    </script>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

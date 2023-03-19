@@ -21,6 +21,9 @@
           top: 0;
           left: -2.5rem;
 
+          .grab--btn:hover {
+            cursor: move;
+          }
           .radio--btn {
             font-size: 1.4rem;
           }

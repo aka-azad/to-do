@@ -12,5 +12,9 @@
     "sass": "^1.58.3",
     "typescript": "^4.9.3",
     "vite": "^4.1.0"
+  },
+  "dependencies": {
+    "@types/feather-icons": "^4.29.1",
+    "feather-icons": "^4.29.0"
   }
 }

@@ -7,10 +7,11 @@
   align-items: center;
   height: 4.5rem;
   /*top & bottom paddin will be removed*/
-  padding: 1.5rem;
+  // padding: 1.5rem;
   background-color: var(--color-primary);
   &-left {
-    display: flex;
+    // display: flex;
+    padding-left: 2rem;
   }
   &-right {
     display: flex;
