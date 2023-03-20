@@ -54,7 +54,7 @@ const addTask = function (title: string, desc: string): void {
   const newTask = { title, desc, id: newTaskId };
 
   taskList.push(newTask);
-  // setItem("task-list-el", taskList);
+
   setItem("task-list", taskList);
 
   // taskComp(title, desc, newTaskId);
