@@ -39,12 +39,11 @@
         color: var(--color-grey-dark-1);
         margin-left: 2rem;
       }
-    }
-  }
-
-  &:hover {
-    .btn-hollow {
-      opacity: 1;
+      &:hover {
+        .btn-hollow {
+          opacity: 1;
+        }
+      }
     }
   }
 }
