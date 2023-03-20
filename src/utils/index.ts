@@ -1,4 +1,4 @@
-export function getItem(key: string): any {
+export function getItem(key: string): [] {
   return JSON.parse(localStorage.getItem(key)!);
 }
 

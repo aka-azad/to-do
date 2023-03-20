@@ -18,9 +18,10 @@ navBtn.addEventListener("click", function () {
 interface ITaskList {
   title: string;
   desc: string;
+  id?: string;
 }
 
-const taskList: ITaskList[] = [];
+let taskList: ITaskList[] = [];
 const taskTitle = document.querySelector(
   ".input__task-name"
 )! as HTMLInputElement;
@@ -30,24 +31,56 @@ const taskDescription = document.querySelector(
 
 const submitTask = document.querySelector(".to-do__inputs")! as HTMLFormElement;
 
-const gatherInputValue = function () {
+const gatherInputValue = function (): any {
   const titleValue = taskTitle.value;
   const descriptionValue = taskDescription.value;
 
-  return { title: titleValue, desc: descriptionValue };
+  if (!titleValue) {
+    return alert("You din't input anything!");
+  } else {
+    clearInputs();
+    return { title: titleValue, desc: descriptionValue };
+  }
 };
 
 const clearInputs = function () {
   taskTitle.value = "";
   taskDescription.value = "";
 };
+
 const addTask = function (title: string, desc: string): void {
-  const newTask = { title, desc, id: Math.random().toString() };
+  const newTaskId: string = Math.random().toString();
+
+  const newTask = { title, desc, id: newTaskId };
 
   taskList.push(newTask);
+  // setItem("task-list-el", taskList);
   setItem("task-list", taskList);
-  taskComp(title, desc, "1");
+
+  // taskComp(title, desc, newTaskId);
+
+  // const localMemory: [] = getItem("task-list");
+
+  // taskComp(getItem("task-list"));
+
+  // console.log(localMemory);
+  listTask();
 };
+
+const listTask = function (): void {
+  const tasksEl = document.querySelector("#task-list")!;
+  tasksEl.innerHTML = "";
+  const tasks = JSON.parse(localStorage.getItem("task-list")!);
+
+  if (tasks) {
+    taskList = tasks;
+    taskList.forEach((task) => taskComp(task));
+    feather.replace({ class: "foo bar", "stroke-width": 1 });
+  }
+};
+
+window.addEventListener("load", listTask);
+
 const submitHandler = function (e: Event) {
   e.preventDefault();
 
@@ -55,43 +88,13 @@ const submitHandler = function (e: Event) {
   const { title, desc } = userInput;
   addTask(title, desc);
 
-  feather.replace({ class: "foo bar", "stroke-width": 1 });
-  clearInputs();
+  // feather.replace({ class: "foo bar", "stroke-width": 1 });
 };
 
 submitTask.addEventListener("submit", submitHandler);
 
-//list items
-// <li class="to-do__list-cont">
-//                   <div class="to-do__list-cont--top">
-//                     <div class="to-do__left-cont">
-//                       <button class="grab--btn btn-hollow">
-//                         <i data-feather="hexagon"></i>
-//                       </button>
-//                       <div class="radio--btn">
-//                         <input
-//                           type="radio"
-//                           title="task-is-complet"
-//                           id="radio1"
-//                         />
-//                         <label class="task-name" for="radio1">kuch bhi</label>
-//                       </div>
-//                     </div>
-//                     <div class="to-do__right-cont">
-//                       <button class="edit--icon btn-hollow">
-//                         <i data-feather="edit-3"></i>
-//                       </button>
-//                       <button class="more--icon btn-hollow">
-//                         <i data-feather="more-horizontal"></i>
-//                       </button>
-//                     </div>
-//                   </div>
-
-//                   <p class="to-do__dscr">bla bla bla</p>
-//                 </li>
-
-function taskComp(title: string, desc: string, id: string) {
-  const tasks = document.querySelector("#task-list");
+function taskComp(taskList: ITaskList) {
+  const tasks = document.querySelector("#task-list")!;
   const list = create({
     tag: "li",
     attributes: { className: "to-do__list-cont" },
@@ -134,7 +137,7 @@ function taskComp(title: string, desc: string, id: string) {
                     attributes: {
                       className: "task-name",
                       for: "radio1",
-                      textContent: title,
+                      textContent: taskList.title,
                     },
                   }),
                 ],
@@ -169,11 +172,10 @@ function taskComp(title: string, desc: string, id: string) {
         tag: "p",
         attributes: {
           className: "to-do__dscr",
-          textContent: desc,
+          textContent: taskList.desc,
         },
       }),
     ],
   });
-  tasks?.appendChild(list);
-  console.log(tasks);
+  return tasks.appendChild(list);
 }
