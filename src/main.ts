@@ -2,7 +2,7 @@ import "./style.scss";
 import { create, elIcon, setItem } from "./utils";
 import feather from "feather-icons";
 
-feather.replace({ class: "foo bar", "stroke-width": 1 });
+feather.replace({ "stroke-width": 1 });
 
 const navBtn = document.querySelector(".nav-logo")! as HTMLDivElement;
 
@@ -36,7 +36,7 @@ const gatherInputValue = function (): any {
   const descriptionValue = taskDescription.value;
 
   if (!titleValue) {
-    return alert("You din't input anything!");
+    return alert("You din't input task name!");
   } else {
     clearInputs();
     return { title: titleValue, desc: descriptionValue };
@@ -57,25 +57,19 @@ const addTask = function (title: string, desc: string): void {
 
   setItem("task-list", taskList);
 
-  // taskComp(title, desc, newTaskId);
-
-  // const localMemory: [] = getItem("task-list");
-
-  // taskComp(getItem("task-list"));
-
-  // console.log(localMemory);
   listTask();
 };
 
 const listTask = function (): void {
-  const tasksEl = document.querySelector("#task-list")!;
-  tasksEl.innerHTML = "";
-  const tasks = JSON.parse(localStorage.getItem("task-list")!);
-
-  if (tasks) {
-    taskList = tasks;
-    taskList.forEach((task) => taskComp(task));
-    feather.replace({ class: "foo bar", "stroke-width": 1 });
+  const tasks = document.querySelector("#task-list")!;
+  tasks.innerHTML = "";
+  const taskData = JSON.parse(localStorage.getItem("task-list")!);
+  if (taskData) {
+    taskList = taskData;
+    for (let i = 0; i < taskList.length; i++) {
+      tasks.appendChild(taskComp(taskList[i]));
+    }
+    feather.replace({ "stroke-width": 1 });
   }
 };
 
@@ -87,15 +81,12 @@ const submitHandler = function (e: Event) {
   const userInput = gatherInputValue();
   const { title, desc } = userInput;
   addTask(title, desc);
-
-  // feather.replace({ class: "foo bar", "stroke-width": 1 });
 };
 
 submitTask.addEventListener("submit", submitHandler);
 
 function taskComp(taskList: ITaskList) {
-  const tasks = document.querySelector("#task-list")!;
-  const list = create({
+  const listItem = create({
     tag: "li",
     attributes: { className: "to-do__list-cont" },
     children: [
@@ -177,5 +168,6 @@ function taskComp(taskList: ITaskList) {
       }),
     ],
   });
-  return tasks.appendChild(list);
+  return listItem;
+  // return tasks.appendChild(list);
 }
