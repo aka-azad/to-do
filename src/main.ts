@@ -156,6 +156,15 @@ function taskComp(taskList: ITaskList) {
                 },
                 children: [elIcon("more-horizontal")],
               }),
+              create({
+                tag: "button",
+                attributes: {
+                  id: "tooltip2",
+                  className: "delete",
+                  role: "tooltip2",
+                  textContent: "Delete",
+                },
+              }),
             ],
           }),
         ],
@@ -184,31 +193,58 @@ import { createPopper } from "@popperjs/core";
 
 const menuBtn = document.querySelector(".heading-logos")! as HTMLButtonElement;
 const tooltip = document.querySelector("#tooltip")! as HTMLButtonElement;
+/*
+const moreBtn = document.querySelector(".more--icon")! as HTMLButtonElement;
+const tooltip2 = document.querySelector(".delete")! as HTMLButtonElement;
 
 function show() {
   tooltip.setAttribute("data-show", "");
+  tooltip2.setAttribute("data-show", "");
 
   // We need to tell Popper to update the tooltip position
   // after we show the tooltip, otherwise it will be incorrect
 
   instance.update();
-}
+  instance2.update();
+}*/
 // function hide() {
 //   tooltip.removeAttribute("data-show");
 // }
 
-const showEvents = ["click", "focus"];
+const showEvents = ["mouseover", "focus"];
 // const hideEvents = ["click", "blur"];
 
 showEvents.forEach((event) => {
-  menuBtn.addEventListener(event, show);
+  menuBtn.addEventListener(event, function () {
+    tooltip.setAttribute("data-show", "");
+
+    // We need to tell Popper to update the tooltip position
+    // after we show the tooltip, otherwise it will be incorrect
+
+    instance.update();
+  });
+  // moreBtn.addEventListener(event, show);
 });
 
 tooltip.addEventListener("click", function () {
+  tooltip.removeAttribute("data-show");
   tasks.innerHTML = "";
   taskList = [];
   setItem("task-list", null);
 });
+window.addEventListener("click", function () {
+  tooltip.removeAttribute("data-show");
+});
+
+/*
+tooltip2.addEventListener("click", function () {
+  const parentEL = tooltip2.parentElement! as HTMLDivElement;
+  parentEL.innerHTML = "";
+  taskList = [];
+  setItem("task-list", null);
+});
+*/
+
 // hideEvents.forEach((event) => {
 //   tooltip.addEventListener(event, hide);
 //   // document.addEventListener("click", function () {
@@ -223,4 +259,8 @@ const instance = createPopper(menuBtn, tooltip, {
 
 // console.log(instance);
 
-//deleting function
+//deleting function more--icon delete
+
+// const instance2 = createPopper(moreBtn, tooltip2, {
+//   placement: "bottom-end",
+// });
