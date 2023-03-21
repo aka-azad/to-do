@@ -193,9 +193,9 @@ function show() {
 
   instance.update();
 }
-function hide() {
-  tooltip.removeAttribute("data-show");
-}
+// function hide() {
+//   tooltip.removeAttribute("data-show");
+// }
 
 const showEvents = ["click", "focus"];
 // const hideEvents = ["click", "blur"];
