@@ -213,6 +213,7 @@ tooltip.addEventListener("click", function () {
 //   tooltip.addEventListener(event, hide);
 //   // document.addEventListener("click", function () {
 //   //   tooltip.removeAttribute("data-show");
+//
 //   // });
 // });
 
