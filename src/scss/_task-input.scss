@@ -3,10 +3,34 @@
   margin: 0 auto;
   padding: 3.5rem 5rem;
 
-  .heading-title {
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 2.5rem;
+  &__heading {
+    .heading-logos {
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+    }
+
+    .heading-title {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 2.5rem;
+    }
+
+    #tooltip {
+      /* ... */
+      display: none;
+    }
+
+    #tooltip[data-show] {
+      display: block;
+      border: 1px solid black;
+      border-radius: 3px;
+      background-color: #ffffff;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-size: 1.4rem;
+      font-weight: 400;
+    }
   }
 
   &__heading {

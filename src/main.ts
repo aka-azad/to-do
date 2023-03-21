@@ -1,5 +1,6 @@
 import "./style.scss";
-import { create, elIcon, setItem } from "./utils";
+import { create, elIcon, setItem } from "./ts/utils";
+// import { menuBtn } from "./ts/popup";
 import feather from "feather-icons";
 
 feather.replace({ "stroke-width": 1 });
@@ -60,8 +61,8 @@ const addTask = function (title: string, desc: string): void {
   listTask();
 };
 
+const tasks = document.querySelector("#task-list")!;
 const listTask = function (): void {
-  const tasks = document.querySelector("#task-list")!;
   tasks.innerHTML = "";
   const taskData = JSON.parse(localStorage.getItem("task-list")!);
   if (taskData) {
@@ -171,3 +172,54 @@ function taskComp(taskList: ITaskList) {
   return listItem;
   // return tasks.appendChild(list);
 }
+
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+
+//popup
+import { createPopper } from "@popperjs/core";
+
+const menuBtn = document.querySelector(".heading-logos")! as HTMLButtonElement;
+const tooltip = document.querySelector("#tooltip")! as HTMLButtonElement;
+
+function show() {
+  tooltip.setAttribute("data-show", "");
+
+  // We need to tell Popper to update the tooltip position
+  // after we show the tooltip, otherwise it will be incorrect
+
+  instance.update();
+}
+function hide() {
+  tooltip.removeAttribute("data-show");
+}
+
+const showEvents = ["click", "focus"];
+// const hideEvents = ["click", "blur"];
+
+showEvents.forEach((event) => {
+  menuBtn.addEventListener(event, show);
+});
+
+tooltip.addEventListener("click", function () {
+  tasks.innerHTML = "";
+  taskList = [];
+  setItem("task-list", null);
+});
+// hideEvents.forEach((event) => {
+//   tooltip.addEventListener(event, hide);
+//   // document.addEventListener("click", function () {
+//   //   tooltip.removeAttribute("data-show");
+//   // });
+// });
+
+const instance = createPopper(menuBtn, tooltip, {
+  placement: "bottom-end",
+});
+
+// console.log(instance);
+
+//deleting function
