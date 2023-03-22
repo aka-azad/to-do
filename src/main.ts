@@ -7,14 +7,29 @@ feather.replace({ "stroke-width": 1 });
 
 const navBtn = document.querySelector(".nav-logo")! as HTMLDivElement;
 
-navBtn.addEventListener("click", function () {
-  const leftNav = document.querySelector(".nav__left")! as HTMLDivElement;
+const leftNav = document.querySelector(".nav__left")! as HTMLDivElement;
 
+navBtn.addEventListener("click", function () {
   if (leftNav.classList.contains("hide")) {
     leftNav.classList.remove("hide");
   } else leftNav.classList.add("hide");
 });
 
+// event listener for media quary
+const mediaQuary = function (width: object) {
+  //@ts-ignore
+  if (width.matches) {
+    if (leftNav.classList.contains("hide")) {
+      leftNav.classList.remove("hide");
+    } else leftNav.classList.add("hide");
+  }
+};
+
+const maxWidth60em = window.matchMedia("(max-width: 50em)");
+const minWidth60em = window.matchMedia("(min-width: 50em)");
+// console.log(maxWidth60em);
+maxWidth60em.addListener(mediaQuary);
+minWidth60em.addListener(mediaQuary);
 //task-input
 interface ITaskList {
   title: string;
@@ -193,10 +208,10 @@ import { createPopper } from "@popperjs/core";
 
 const menuBtn = document.querySelector(".heading-logos")! as HTMLButtonElement;
 const tooltip = document.querySelector("#tooltip")! as HTMLButtonElement;
-/*
-const moreBtn = document.querySelector(".more--icon")! as HTMLButtonElement;
-const tooltip2 = document.querySelector(".delete")! as HTMLButtonElement;
 
+// const moreBtn = document.querySelector(".more--icon")! as HTMLButtonElement;
+// const tooltip2 = document.querySelector(".delete")! as HTMLButtonElement;
+/*
 function show() {
   tooltip.setAttribute("data-show", "");
   tooltip2.setAttribute("data-show", "");
@@ -218,13 +233,17 @@ showEvents.forEach((event) => {
   menuBtn.addEventListener(event, function () {
     tooltip.setAttribute("data-show", "");
 
-    // We need to tell Popper to update the tooltip position
-    // after we show the tooltip, otherwise it will be incorrect
-
     instance.update();
   });
-  // moreBtn.addEventListener(event, show);
 });
+
+// showEvents.forEach((event) => {
+//   moreBtn.addEventListener(event, function () {
+//     tooltip2.setAttribute("data-show", "");
+
+//     instance2.update();
+//   });
+// });
 
 tooltip.addEventListener("click", function () {
   tooltip.removeAttribute("data-show");
@@ -232,6 +251,7 @@ tooltip.addEventListener("click", function () {
   taskList = [];
   setItem("task-list", null);
 });
+
 window.addEventListener("click", function () {
   tooltip.removeAttribute("data-show");
 });

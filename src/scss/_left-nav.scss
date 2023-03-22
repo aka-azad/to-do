@@ -26,3 +26,12 @@
     }
   }
 }
+
+@media (max-width: 50em) {
+  .nav__left {
+    // display: none;
+    position: fixed;
+    height: 100%;
+    z-index: 200;
+  }
+}
